@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="angular-1.8.2/angular.min.js"></script>
+    <script src="angular-1.8.2/angular-route.min.js"></script>
+    <title>page routing</title>
+  </head>
+  <body ng-app="myOwnApp" ng-controller="mcol1">
+    <h1>Routes</h1>
+    <br />
+    {{message}}
+    <div ng-controller="mcol2">{{message}}</div>
+    <div ng-controller="mcol3">{{message}}</div>
+
+    <ul>
+      <li><a href="#/!">first</a></li>
+      <li><a href="#!seond">second</a></li>
+      <li><a href="#!third">Third</a></li>
+      <li><a href="#!fourth">fourth</a></li>
+    </ul>
+    <br /><br />
+    <div
+      align="center"
+      ng-view
+      style="
+        background-color: lightblue;
+        border-style: solid;
+        max-height: 500px;
+        max-width: 40%;
+        margin-left: 15%;
+        padding: 95px;
+        border-width: thin;
+      "
+    ></div>
+
+    <script>
+      var app = angular.module("myOwnApp", ["ngRoute"]);
+      app.config(function ($routeProvider) {
+        $routeProvider
+          .when("/", {
+            templateUrl: "firstr.html",
+            controller: "mcol1",
+          })
+          .when("/seond", { templateUrl: "seond.html", controller: "mcol2" })
+          .when("/third", { templateUrl: "third.html", controller: "mcol3" })
+          .when("/fourth", { templateUrl: "fourth.html", controller: "mcol3" })
+          .otherwise({ redirectTo: "/" });
+      });
+      app.controller("mcol1", function ($scope) {
+        $scope.message = "first page";
+      });
+      app.controller("mcol2", function ($scope) {
+        $scope.message = "Second page";
+      });
+      app.controller("mcol3", function ($scope) {
+        $scope.message = "Third page";
+      });
+    </script>
+  </body>
+</html>
